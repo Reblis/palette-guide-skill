@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ricarte.ai · Palette Guide</title>
+<meta name="description" content="Ricarte.ai color palette guide — primary and secondary colors, shade ramps with alpha-to-hex conversion, and every gradient pairing.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --rose:   #FF006E;
+    --violet: #8338EC;
+    --azure:  #3A86FF;
+    --sand:   #C9B29F;
+    --linen:  #E4D8CF;
+    --mist:   #EBEBEB;
+
+    --dark:   #1E1430;   /* deep anchor derived from violet */
+    --paper:  #FFFFFF;
+    --page:   #F5F4F7;
+
+    --ink:    #232A33;
+    --slate:  #585E6A;
+    --mid:    #686E77;
+    --rule:   #DFDCE5;
+    --rule-2: #EEECF2;
+
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .page { max-width: 1240px; margin: 0 auto; padding: 0 24px 120px; }
+  @media (min-width: 760px)  { .page { padding: 0 40px 120px; } }
+  @media (min-width: 1200px) { .page { padding: 0 25px 120px; } }
+
+  /* ============ HEADER ============ */
+  .header-bar {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 60px 24px 76px;
+    background: var(--dark);
+    background-image: linear-gradient(135deg, var(--rose) 0%, var(--violet) 52%, var(--dark) 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-bar::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 5px;
+    background: var(--azure);
+  }
+  .header-bar .inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; }
+  .header-bar .kicker {
+    font-weight: 700; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px;
+  }
+  .header-bar .brandmark {
+    height: 58px; width: auto; display: block; margin: 0 0 24px;
+  }
+  .header-bar p.lede {
+    font-weight: 400; font-size: 17px; line-height: 1.55;
+    color: rgba(255,255,255,0.88); max-width: 770px; margin: 0 0 24px;
+  }
+  .header-bar .meta {
+    font-size: 12px; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.6); text-transform: uppercase;
+  }
+  .header-bar .meta span { color: rgba(255,255,255,0.95); }
+  .chip-row { display: flex; gap: 8px; margin-bottom: 26px; }
+  .chip { width: 34px; height: 34px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.35); }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 56px;
+  }
+  .nav-inner {
+    max-width: 1240px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center;
+  }
+  .nav-brand { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; color: var(--dark); margin-right: auto; }
+  .nav-brand .pf { color: var(--rose); }
+  .nav a {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none; font-weight: 600;
+    padding: 4px 0; border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .nav a:hover { color: var(--violet); border-bottom-color: var(--rose); }
+
+  /* ============ SECTION ============ */
+  section { margin-bottom: 96px; }
+  section > h2 {
+    font-weight: 700; font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--rose); margin: 0 0 8px;
+  }
+  section > h2 + .section-title {
+    font-weight: 700;
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--dark); margin: 0 0 12px;
+  }
+  section > .section-blurb { color: var(--slate); font-size: 15px; max-width: 720px; margin: 0 0 32px; }
+
+  /* ============ SWATCHES ============ */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .swatch { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .swatch-color { height: 110px; }
+  .swatch-meta { padding: 12px 14px; font-size: 12px; border-top: 1px solid var(--rule-2); }
+  .swatch-meta .name { font-weight: 700; color: var(--ink); margin-bottom: 4px; font-size: 14px; }
+  .swatch-meta .role { color: var(--mid); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+  .swatch-meta .hex { font-family: var(--mono); color: var(--slate); font-size: 11px; line-height: 1.7; }
+
+  /* ============ SHADE RAMPS ============ */
+  .ramp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .ramp { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); }
+  .ramp .ramp-name {
+    padding: 10px 14px; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ramp .dot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+  .shade {
+    padding: 10px 14px;
+    display: grid; grid-template-columns: 1fr auto 44px;
+    gap: 10px; align-items: center;
+    font-family: var(--mono); font-size: 11px;
+  }
+  .shade .sh-rgba { opacity: 0.75; }
+  .shade .sh-pct { opacity: 0.7; text-align: right; }
+
+  /* ============ GRADIENTS ============ */
+  .gradient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .gradient-card { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); }
+  .gradient-preview { height: 120px; }
+  .gradient-stops { display: flex; }
+  .gradient-stop {
+    flex: 1; padding: 9px 12px;
+    font-family: var(--mono); font-size: 11px; text-align: center;
+  }
+  .g-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--slate); margin-top: 12px; text-align: center;
+  }
+
+  /* ============ CALLOUT ============ */
+  .callout {
+    border-left: 4px solid var(--violet);
+    background: #EFE7FC;
+    padding: 20px 24px;
+    border-radius: 0 6px 6px 0;
+    color: var(--dark);
+    font-size: 14px; line-height: 1.55;
+    margin-top: 32px;
+  }
+  .callout code { font-family: var(--mono); background: rgba(131,56,236,0.12); padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 40px 15px 32px; border-top: 1px solid var(--rule);
+    color: var(--mid); font-size: 13px;
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+  }
+  footer .stamp { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; }
+
+  @media (max-width: 760px) {
+    .shade { grid-template-columns: 1fr auto; }
+    .shade .sh-rgba { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header-bar">
+  <div class="inner">
+    <div class="kicker">Palette Guide · 2026 Edition</div>
+    <svg class="brandmark" style="color:#FFFFFF;" role="img" aria-label="Ricarte" viewBox="0 0 849 176" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M185.2 130C186.933 130 188.267 130.8 189.2 132.4C190.267 134 190.8 136.2 190.8 139C190.8 144.2 189.533 148.333 187 151.4C180.6 159.133 174.133 165.133 167.6 169.4C161.067 173.533 153.333 175.6 144.4 175.6C135.733 175.6 128.333 173.267 122.2 168.6C116.2 163.933 110.467 155.933 105 144.6C100.6 135.533 97.1333 128.867 94.6 124.6C92.0667 120.2 89.5333 117.067 87 115.2C84.6 113.333 81.6 112.2 78 111.8C77.4667 114.6 75.9333 123.4 73.4 138.2C72.3333 144.867 71.6667 148.933 71.4 150.4C70.0667 158.533 67.4 164.8 63.4 169.2C59.4 173.467 53.3333 175.6 45.2 175.6C36.2667 175.6 28.3333 173 21.4 167.8C14.6 162.467 9.33333 155.133 5.6 145.8C1.86667 136.333 6.85453e-07 125.6 6.85453e-07 113.6C6.85453e-07 91.2 3.86667 71.8667 11.6 55.6C19.4667 39.3333 30.4 26.9333 44.4 18.4C58.5333 9.73334 74.8 5.4 93.2 5.4C106 5.4 116.733 7.33334 125.4 11.2C134.067 15.0667 140.467 20.4 144.6 27.2C148.867 34 151 41.6667 151 50.2C151 57.6667 149.2 65 145.6 72.2C142.133 79.2667 136.867 85.5333 129.8 91C122.733 96.4667 114.133 100.533 104 103.2C110.4 104.933 115.333 107.733 118.8 111.6C122.267 115.467 125.733 121.133 129.2 128.6C132.933 136.6 136.6 142.467 140.2 146.2C143.933 149.933 148.2 151.8 153 151.8C157.267 151.8 161.333 150.4 165.2 147.6C169.067 144.667 173.933 139.733 179.8 132.8C181.4 130.933 183.2 130 185.2 130ZM50.4 111.6C45.8667 111.6 42.7333 110.533 41 108.4C39.4 106.267 38.6 103.867 38.6 101.2C38.6 98 39.6 95.4667 41.6 93.6C43.7333 91.7333 46.1333 90.8 48.8 90.8H53.8C55.9333 77.7333 57.9333 66.4667 59.8 57C61.5333 48.3333 67.1333 44 76.6 44C84.2 44 88 47.4 88 54.2C88 55.6667 87.9333 56.8 87.8 57.6L81.8 90.8C89 90.4 95.5333 88.6667 101.4 85.6C107.4 82.5333 112.133 78.2667 115.6 72.8C119.2 67.3333 121 61.1333 121 54.2C121 45.8 118.133 39.2 112.4 34.4C106.667 29.6 98.2667 27.2 87.2 27.2C74.1333 27.2 62.6667 30.4667 52.8 37C43.0667 43.4 35.4667 53 30 65.8C24.5333 78.4667 21.8 93.9333 21.8 112.2C21.8 120.733 22.6667 128.067 24.4 134.2C26.1333 140.333 28.2667 144.933 30.8 148C33.3333 151.067 35.7333 152.6 38 152.6C39.7333 152.6 41.1333 151.733 42.2 150C43.4 148.267 44.3333 145.467 45 141.6L50.4 111.6ZM200.777 68.2C195.177 68.2 190.977 66.9333 188.177 64.4C185.377 61.7333 183.977 58.0667 183.977 53.4C183.977 48.7333 185.777 44.8667 189.377 41.8C193.11 38.6 197.71 37 203.177 37C208.11 37 212.11 38.2 215.177 40.6C218.243 43 219.777 46.4 219.777 50.8C219.777 56.1333 218.043 60.4 214.577 63.6C211.11 66.6667 206.51 68.2 200.777 68.2ZM199.177 175.6C190.51 175.6 184.177 172.533 180.177 166.4C176.31 160.267 174.377 152.133 174.377 142C174.377 136 175.11 128.333 176.577 119C178.177 109.533 180.177 100.733 182.577 92.6C183.777 88.3333 185.377 85.4 187.377 83.8C189.377 82.2 192.577 81.4 196.977 81.4C203.777 81.4 207.177 83.6667 207.177 88.2C207.177 91.5333 205.91 99.2667 203.377 111.4C200.177 126.067 198.577 136 198.577 141.2C198.577 145.2 199.11 148.267 200.177 150.4C201.243 152.533 203.043 153.6 205.577 153.6C207.977 153.6 210.977 151.933 214.577 148.6C218.177 145.267 222.977 140 228.977 132.8C230.577 130.933 232.377 130 234.377 130C236.11 130 237.443 130.8 238.377 132.4C239.443 134 239.977 136.2 239.977 139C239.977 144.333 238.71 148.467 236.177 151.4C222.977 167.533 210.643 175.6 199.177 175.6ZM261.995 175.6C248.929 175.6 238.729 171.933 231.395 164.6C224.195 157.133 220.595 147.333 220.595 135.2C220.595 124.4 222.729 114.933 226.995 106.8C231.262 98.6667 236.795 92.4 243.595 88C250.395 83.6 257.529 81.4 264.995 81.4C272.329 81.4 277.995 83.6 281.995 88C286.129 92.2667 288.195 97.8 288.195 104.6C288.195 110.2 286.929 114.933 284.395 118.8C281.995 122.667 278.795 124.6 274.795 124.6C272.262 124.6 270.195 124 268.595 122.8C267.129 121.6 266.395 119.933 266.395 117.8C266.395 116.867 266.529 115.8 266.795 114.6C267.062 113.4 267.262 112.533 267.395 112C268.062 110 268.395 108.133 268.395 106.4C268.395 104.667 267.929 103.333 266.995 102.4C266.195 101.467 264.995 101 263.395 101C260.329 101 257.462 102.4 254.795 105.2C252.129 107.867 249.995 111.533 248.395 116.2C246.795 120.867 245.995 126 245.995 131.6C245.995 147.067 252.729 154.8 266.195 154.8C271.662 154.8 277.529 153 283.795 149.4C290.195 145.667 296.462 140.133 302.595 132.8C304.195 130.933 305.995 130 307.995 130C309.729 130 311.062 130.8 311.995 132.4C313.062 134 313.595 136.2 313.595 139C313.595 144.067 312.329 148.2 309.795 151.4C303.529 159.133 295.995 165.133 287.195 169.4C278.529 173.533 270.129 175.6 261.995 175.6ZM320.075 175.6C311.808 175.6 305.208 172.6 300.275 166.6C295.342 160.6 292.875 152.733 292.875 143C292.875 132.333 295.342 122.267 300.275 112.8C305.208 103.2 311.742 95.5333 319.875 89.8C328.142 83.9333 336.875 81 346.075 81C349.008 81 350.942 81.6 351.875 82.8C352.942 83.8667 353.808 85.8667 354.475 88.8C357.275 88.2667 360.208 88 363.275 88C369.808 88 373.075 90.3333 373.075 95C373.075 97.8 372.075 104.467 370.075 115C367.008 130.333 365.475 141 365.475 147C365.475 149 365.942 150.6 366.875 151.8C367.942 153 369.275 153.6 370.875 153.6C373.408 153.6 376.475 152 380.075 148.8C383.675 145.467 388.542 140.133 394.675 132.8C396.275 130.933 398.075 130 400.075 130C401.808 130 403.142 130.8 404.075 132.4C405.142 134 405.675 136.2 405.675 139C405.675 144.333 404.408 148.467 401.875 151.4C396.408 158.2 390.608 163.933 384.475 168.6C378.342 173.267 372.408 175.6 366.675 175.6C362.275 175.6 358.208 174.133 354.475 171.2C350.875 168.133 348.142 164 346.275 158.8C339.342 170 330.608 175.6 320.075 175.6ZM327.275 155.4C330.208 155.4 333.008 153.667 335.675 150.2C338.342 146.733 340.275 142.133 341.475 136.4L348.875 99.6C343.275 99.7333 338.075 101.867 333.275 106C328.608 110 324.875 115.333 322.075 122C319.275 128.667 317.875 135.733 317.875 143.2C317.875 147.333 318.675 150.4 320.275 152.4C322.008 154.4 324.342 155.4 327.275 155.4ZM470.22 108.8C473.154 108.8 475.62 109.867 477.62 112C479.754 114 480.82 116.533 480.82 119.6C480.82 121.333 480.42 123.2 479.62 125.2C477.487 130.133 474.487 134.267 470.62 137.6C466.754 140.933 462.487 142.6 457.82 142.6C454.087 142.6 450.887 141.267 448.22 138.6C445.687 135.933 444.42 132.333 444.42 127.8C444.42 125.267 444.554 122.533 444.82 119.6C445.087 117.467 445.22 116 445.22 115.2C445.22 114.133 444.954 113.333 444.42 112.8C444.02 112.267 443.487 112 442.82 112C440.954 112 438.42 114.267 435.22 118.8C432.02 123.2 428.82 129.067 425.62 136.4C422.42 143.733 419.82 151.467 417.82 159.6C416.354 166 414.687 170.267 412.82 172.4C410.954 174.533 407.887 175.6 403.62 175.6C398.554 175.6 394.954 172.933 392.82 167.6C390.82 162.267 389.82 153.733 389.82 142C389.82 124.667 392.287 108.2 397.22 92.6C398.42 88.7333 400.354 85.9333 403.02 84.2C405.82 82.3333 409.687 81.4 414.62 81.4C417.287 81.4 419.154 81.7333 420.22 82.4C421.287 83.0667 421.82 84.3333 421.82 86.2C421.82 88.3333 420.82 93.1333 418.82 100.6C417.487 105.933 416.42 110.6 415.62 114.6C414.82 118.6 414.154 123.533 413.62 129.4C418.02 117.933 422.954 108.6 428.42 101.4C433.887 94.2 439.22 89.0667 444.42 86C449.62 82.9333 454.354 81.4 458.62 81.4C462.487 81.4 465.42 82.5333 467.42 84.8C469.554 86.9333 470.62 90.1333 470.62 94.4C470.62 96.9333 469.887 101.733 468.42 108.8H470.22ZM577.644 130C579.377 130 580.71 130.8 581.644 132.4C582.71 134 583.244 136.2 583.244 139C583.244 144.333 581.977 148.467 579.444 151.4C573.71 158.467 567.444 164.267 560.644 168.8C553.844 173.333 546.044 175.6 537.244 175.6C510.044 175.6 496.444 156.467 496.444 118.2C496.444 112.333 496.644 106.4 497.044 100.4H489.244C485.244 100.4 482.51 99.6667 481.044 98.2C479.71 96.7333 479.044 94.4 479.044 91.2C479.044 83.7333 482.044 80 488.044 80H499.444C501.71 65.3333 505.177 51.9333 509.844 39.8C514.51 27.6667 520.11 18 526.644 10.8C533.31 3.6 540.444 9.53674e-07 548.044 9.53674e-07C553.644 9.53674e-07 558.044 2.46667 561.244 7.4C564.444 12.3333 566.044 18.5333 566.044 26C566.044 46.6667 557.377 64.6667 540.044 80H562.444C564.577 80 566.11 80.4667 567.044 81.4C567.977 82.3333 568.444 84.0667 568.444 86.6C568.444 95.8 560.91 100.4 545.844 100.4H521.444C521.177 107.067 521.044 112.267 521.044 116C521.044 129.867 522.644 139.6 525.844 145.2C529.177 150.8 534.377 153.6 541.444 153.6C547.177 153.6 552.244 151.867 556.644 148.4C561.044 144.933 566.244 139.733 572.244 132.8C573.844 130.933 575.644 130 577.644 130ZM542.644 19.2C540.644 19.2 538.377 21.7333 535.844 26.8C533.444 31.7333 531.11 38.6667 528.844 47.6C526.71 56.4 524.91 66.2 523.444 77C531.31 70.2 537.177 62.6 541.044 54.2C545.044 45.6667 547.044 37.9333 547.044 31C547.044 23.1333 545.577 19.2 542.644 19.2ZM638.559 136C640.293 136 641.626 136.8 642.559 138.4C643.626 140 644.159 142.2 644.159 145C644.159 149.8 643.026 153.933 640.759 157.4C637.026 163.133 632.093 167.6 625.959 170.8C619.959 174 612.759 175.6 604.359 175.6C591.559 175.6 581.626 171.8 574.559 164.2C567.493 156.467 563.959 146.067 563.959 133C563.959 123.8 565.893 115.267 569.759 107.4C573.626 99.4 578.959 93.0667 585.759 88.4C592.693 83.7333 600.493 81.4 609.159 81.4C616.893 81.4 623.093 83.7333 627.759 88.4C632.426 92.9333 634.759 99.1333 634.759 107C634.759 116.2 631.426 124.133 624.759 130.8C618.226 137.333 607.026 142.533 591.159 146.4C594.359 152.533 599.759 155.6 607.359 155.6C612.826 155.6 617.293 154.333 620.759 151.8C624.359 149.267 628.493 145 633.159 139C634.759 137 636.559 136 638.559 136ZM605.759 101C600.826 101 596.626 103.867 593.159 109.6C589.826 115.333 588.159 122.267 588.159 130.4V130.8C596.026 128.933 602.226 126.133 606.759 122.4C611.293 118.667 613.559 114.333 613.559 109.4C613.559 106.867 612.826 104.867 611.359 103.4C610.026 101.8 608.159 101 605.759 101ZM671.97 175.6C666.104 175.6 661.637 174 658.57 170.8C655.637 167.6 654.17 163.4 654.17 158.2C654.17 152.2 655.837 147.4 659.17 143.8C662.637 140.2 667.437 138.4 673.57 138.4C679.437 138.4 683.837 139.867 686.77 142.8C689.837 145.6 691.37 149.8 691.37 155.4C691.37 161.533 689.637 166.467 686.17 170.2C682.704 173.8 677.97 175.6 671.97 175.6ZM732.184 175.6C723.918 175.6 717.318 172.6 712.384 166.6C707.451 160.6 704.984 152.733 704.984 143C704.984 132.333 707.451 122.267 712.384 112.8C717.318 103.2 723.851 95.5333 731.984 89.8C740.251 83.9333 748.984 81 758.184 81C761.118 81 763.051 81.6 763.984 82.8C765.051 83.8667 765.918 85.8667 766.584 88.8C769.384 88.2667 772.318 88 775.384 88C781.918 88 785.184 90.3333 785.184 95C785.184 97.8 784.184 104.467 782.184 115C779.118 130.333 777.584 141 777.584 147C777.584 149 778.051 150.6 778.984 151.8C780.051 153 781.384 153.6 782.984 153.6C785.518 153.6 788.584 152 792.184 148.8C795.784 145.467 800.651 140.133 806.784 132.8C808.384 130.933 810.184 130 812.184 130C813.918 130 815.251 130.8 816.184 132.4C817.251 134 817.784 136.2 817.784 139C817.784 144.333 816.518 148.467 813.984 151.4C808.518 158.2 802.718 163.933 796.584 168.6C790.451 173.267 784.518 175.6 778.784 175.6C774.384 175.6 770.318 174.133 766.584 171.2C762.984 168.133 760.251 164 758.384 158.8C751.451 170 742.718 175.6 732.184 175.6ZM739.384 155.4C742.318 155.4 745.118 153.667 747.784 150.2C750.451 146.733 752.384 142.133 753.584 136.4L760.984 99.6C755.384 99.7333 750.184 101.867 745.384 106C740.718 110 736.984 115.333 734.184 122C731.384 128.667 729.984 135.733 729.984 143.2C729.984 147.333 730.784 150.4 732.384 152.4C734.118 154.4 736.451 155.4 739.384 155.4ZM829.13 68.2C823.53 68.2 819.33 66.9333 816.53 64.4C813.73 61.7333 812.33 58.0667 812.33 53.4C812.33 48.7333 814.13 44.8667 817.73 41.8C821.463 38.6 826.063 37 831.53 37C836.463 37 840.463 38.2 843.53 40.6C846.596 43 848.13 46.4 848.13 50.8C848.13 56.1333 846.396 60.4 842.93 63.6C839.463 66.6667 834.863 68.2 829.13 68.2ZM809.93 175.6C805.663 175.6 802.73 174.733 801.13 173C799.53 171.267 798.73 168.533 798.73 164.8C798.73 163.733 798.863 161.867 799.13 159.2C801.263 134.8 804.796 112.6 809.73 92.6C810.796 88.4667 812.53 85.6 814.93 84C817.463 82.2667 821.463 81.4 826.93 81.4C832.663 81.4 835.53 83.7333 835.53 88.4C835.53 89.0667 835.396 90.3333 835.13 92.2C829.13 120.733 825.53 144.667 824.33 164C824.063 168.267 822.796 171.267 820.53 173C818.263 174.733 814.73 175.6 809.93 175.6Z" fill="currentColor"/> </svg>
+    <div class="chip-row">
+      <div class="chip" style="background:#FF006E;"></div>
+      <div class="chip" style="background:#8338EC;"></div>
+      <div class="chip" style="background:#3A86FF;"></div>
+      <div class="chip" style="background:#C9B29F;"></div>
+      <div class="chip" style="background:#E4D8CF;"></div>
+      <div class="chip" style="background:#EBEBEB;"></div>
+    </div>
+    <p class="lede">The Ricarte color system — three vivid primaries carry the brand's energy while three warm neutrals ground it. This guide defines every color, its full shade ramp with alpha-derived tints, and all 15 gradient pairings.</p>
+    <p class="meta">Primaries <span>3</span> &nbsp;·&nbsp; Secondaries <span>3</span> &nbsp;·&nbsp; Gradients <span>15</span></p>
+  </div>
+</header>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand"><span class="pf">Ricarte.ai</span> · Palette Guide</span>
+    <a href="#primary">Primary</a>
+    <a href="#secondary">Secondary</a>
+    <a href="#ramps">Shade Ramps</a>
+    <a href="#gradients">Gradients</a>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ================= 01 PRIMARY ================= -->
+<section id="primary">
+  <h2>01 · Primary</h2>
+  <div class="section-title">Brand Colors</div>
+  <p class="section-blurb">The three vivid primaries. Rose leads as the signature and call-to-action color; Violet and Azure carry interaction and depth.</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #FF006E;"></div>
+      <div class="swatch-meta">
+        <div class="name">Rose</div>
+        <div class="role">Primary</div>
+        <div class="hex">HEX #FF006E · RGB 255 0 110</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #8338EC;"></div>
+      <div class="swatch-meta">
+        <div class="name">Violet</div>
+        <div class="role">Primary</div>
+        <div class="hex">HEX #8338EC · RGB 131 56 236</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #3A86FF;"></div>
+      <div class="swatch-meta">
+        <div class="name">Azure</div>
+        <div class="role">Primary</div>
+        <div class="hex">HEX #3A86FF · RGB 58 134 255</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 SECONDARY ================= -->
+<section id="secondary">
+  <h2>02 · Secondary</h2>
+  <div class="section-title">Supporting Neutrals</div>
+  <p class="section-blurb">Three warm neutrals for surfaces, cards, and quiet moments — they let the primaries do the talking.</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background: #C9B29F;"></div>
+      <div class="swatch-meta">
+        <div class="name">Sand</div>
+        <div class="role">Secondary</div>
+        <div class="hex">HEX #C9B29F · RGB 201 178 159</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #E4D8CF;"></div>
+      <div class="swatch-meta">
+        <div class="name">Linen</div>
+        <div class="role">Secondary</div>
+        <div class="hex">HEX #E4D8CF · RGB 228 216 207</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #EBEBEB; border-bottom: 1px solid var(--rule);"></div>
+      <div class="swatch-meta">
+        <div class="name">Mist</div>
+        <div class="role">Secondary</div>
+        <div class="hex">HEX #EBEBEB · RGB 235 235 235</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 SHADE RAMPS ================= -->
+<section id="ramps">
+  <h2>03 · Shade Ramps</h2>
+  <div class="section-title">Tints &amp; Transparency</div>
+  <p class="section-blurb">Each color extends into a five-step ramp. Steps are the color at reduced opacity over white, flattened to a solid hex — both notations are shown, so you can use the solid hex on opaque surfaces or the rgba() when true transparency is needed.</p>
+  <div class="ramp-grid">
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#FF006E;"></span>Rose Ramp</div>
+      <div class="shade" style="background:#FF308A; color:#FFFFFF;"><span class="sh-hex">#FF308A</span><span class="sh-rgba">rgba(255, 0, 110, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#FF61A5; color:#FFFFFF;"><span class="sh-hex">#FF61A5</span><span class="sh-rgba">rgba(255, 0, 110, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#FF91C1; color:#1E1430;"><span class="sh-hex">#FF91C1</span><span class="sh-rgba">rgba(255, 0, 110, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#FFC2DC; color:#1E1430;"><span class="sh-hex">#FFC2DC</span><span class="sh-rgba">rgba(255, 0, 110, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#FFF2F8; color:#1E1430;"><span class="sh-hex">#FFF2F8</span><span class="sh-rgba">rgba(255, 0, 110, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#8338EC;"></span>Violet Ramp</div>
+      <div class="shade" style="background:#9B5EF0; color:#FFFFFF;"><span class="sh-hex">#9B5EF0</span><span class="sh-rgba">rgba(131, 56, 236, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#B284F3; color:#FFFFFF;"><span class="sh-hex">#B284F3</span><span class="sh-rgba">rgba(131, 56, 236, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#CAA9F7; color:#1E1430;"><span class="sh-hex">#CAA9F7</span><span class="sh-rgba">rgba(131, 56, 236, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#E1CFFA; color:#1E1430;"><span class="sh-hex">#E1CFFA</span><span class="sh-rgba">rgba(131, 56, 236, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#F9F5FE; color:#1E1430;"><span class="sh-hex">#F9F5FE</span><span class="sh-rgba">rgba(131, 56, 236, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#3A86FF;"></span>Azure Ramp</div>
+      <div class="shade" style="background:#5F9DFF; color:#1E1430;"><span class="sh-hex">#5F9DFF</span><span class="sh-rgba">rgba(58, 134, 255, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#85B4FF; color:#1E1430;"><span class="sh-hex">#85B4FF</span><span class="sh-rgba">rgba(58, 134, 255, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#AACBFF; color:#1E1430;"><span class="sh-hex">#AACBFF</span><span class="sh-rgba">rgba(58, 134, 255, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#D0E2FF; color:#1E1430;"><span class="sh-hex">#D0E2FF</span><span class="sh-rgba">rgba(58, 134, 255, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#F5F9FF; color:#1E1430;"><span class="sh-hex">#F5F9FF</span><span class="sh-rgba">rgba(58, 134, 255, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#C9B29F;"></span>Sand Ramp</div>
+      <div class="shade" style="background:#D3C1B1; color:#1E1430;"><span class="sh-hex">#D3C1B1</span><span class="sh-rgba">rgba(201, 178, 159, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#DECFC3; color:#1E1430;"><span class="sh-hex">#DECFC3</span><span class="sh-rgba">rgba(201, 178, 159, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#E8DED6; color:#1E1430;"><span class="sh-hex">#E8DED6</span><span class="sh-rgba">rgba(201, 178, 159, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#F2EDE8; color:#1E1430;"><span class="sh-hex">#F2EDE8</span><span class="sh-rgba">rgba(201, 178, 159, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#FCFBFA; color:#1E1430;"><span class="sh-hex">#FCFBFA</span><span class="sh-rgba">rgba(201, 178, 159, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#E4D8CF;"></span>Linen Ramp</div>
+      <div class="shade" style="background:#E9DFD8; color:#1E1430;"><span class="sh-hex">#E9DFD8</span><span class="sh-rgba">rgba(228, 216, 207, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#EEE7E1; color:#1E1430;"><span class="sh-hex">#EEE7E1</span><span class="sh-rgba">rgba(228, 216, 207, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#F3EEEA; color:#1E1430;"><span class="sh-hex">#F3EEEA</span><span class="sh-rgba">rgba(228, 216, 207, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#F9F6F3; color:#1E1430;"><span class="sh-hex">#F9F6F3</span><span class="sh-rgba">rgba(228, 216, 207, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#FEFDFD; color:#1E1430;"><span class="sh-hex">#FEFDFD</span><span class="sh-rgba">rgba(228, 216, 207, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+    <div class="ramp">
+      <div class="ramp-name"><span class="dot" style="background:#EBEBEB;"></span>Mist Ramp</div>
+      <div class="shade" style="background:#EFEFEF; color:#1E1430;"><span class="sh-hex">#EFEFEF</span><span class="sh-rgba">rgba(235, 235, 235, 0.81)</span><span class="sh-pct">81%</span></div>
+      <div class="shade" style="background:#F3F3F3; color:#1E1430;"><span class="sh-hex">#F3F3F3</span><span class="sh-rgba">rgba(235, 235, 235, 0.62)</span><span class="sh-pct">62%</span></div>
+      <div class="shade" style="background:#F6F6F6; color:#1E1430;"><span class="sh-hex">#F6F6F6</span><span class="sh-rgba">rgba(235, 235, 235, 0.43)</span><span class="sh-pct">43%</span></div>
+      <div class="shade" style="background:#FAFAFA; color:#1E1430;"><span class="sh-hex">#FAFAFA</span><span class="sh-rgba">rgba(235, 235, 235, 0.24)</span><span class="sh-pct">24%</span></div>
+      <div class="shade" style="background:#FEFEFE; color:#1E1430;"><span class="sh-hex">#FEFEFE</span><span class="sh-rgba">rgba(235, 235, 235, 0.05)</span><span class="sh-pct">5%</span></div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Two notations, one color.</strong> <code>#FF66A8</code> and <code>rgba(255, 0, 110, 0.62)</code> look identical over white — but only the rgba version stays correct over imagery or tinted surfaces. Prefer the solid hex for backgrounds and the rgba for overlays.
+  </div>
+</section>
+
+<!-- ================= 04 GRADIENTS ================= -->
+<section id="gradients">
+  <h2>04 · Gradients</h2>
+  <div class="section-title">Every Pairing</div>
+  <p class="section-blurb">All 15 two-color combinations from the palette at 135°. Vivid-on-vivid pairs make hero moments; vivid-on-neutral pairs make soft washes.</p>
+  <div class="gradient-grid">
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #FF006E, #8338EC);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#FF006E; color:#FFFFFF;">#FF006E</div>
+          <div class="gradient-stop" style="background:#8338EC; color:#FFFFFF;">#8338EC</div>
+        </div>
+      </div>
+      <div class="g-label">Rose × Violet</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #FF006E, #3A86FF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#FF006E; color:#FFFFFF;">#FF006E</div>
+          <div class="gradient-stop" style="background:#3A86FF; color:#FFFFFF;">#3A86FF</div>
+        </div>
+      </div>
+      <div class="g-label">Rose × Azure</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #FF006E, #C9B29F);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#FF006E; color:#FFFFFF;">#FF006E</div>
+          <div class="gradient-stop" style="background:#C9B29F; color:#1E1430;">#C9B29F</div>
+        </div>
+      </div>
+      <div class="g-label">Rose × Sand</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #FF006E, #E4D8CF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#FF006E; color:#FFFFFF;">#FF006E</div>
+          <div class="gradient-stop" style="background:#E4D8CF; color:#1E1430;">#E4D8CF</div>
+        </div>
+      </div>
+      <div class="g-label">Rose × Linen</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #FF006E, #EBEBEB);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#FF006E; color:#FFFFFF;">#FF006E</div>
+          <div class="gradient-stop" style="background:#EBEBEB; color:#1E1430;">#EBEBEB</div>
+        </div>
+      </div>
+      <div class="g-label">Rose × Mist</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #8338EC, #3A86FF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#8338EC; color:#FFFFFF;">#8338EC</div>
+          <div class="gradient-stop" style="background:#3A86FF; color:#FFFFFF;">#3A86FF</div>
+        </div>
+      </div>
+      <div class="g-label">Violet × Azure</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #8338EC, #C9B29F);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#8338EC; color:#FFFFFF;">#8338EC</div>
+          <div class="gradient-stop" style="background:#C9B29F; color:#1E1430;">#C9B29F</div>
+        </div>
+      </div>
+      <div class="g-label">Violet × Sand</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #8338EC, #E4D8CF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#8338EC; color:#FFFFFF;">#8338EC</div>
+          <div class="gradient-stop" style="background:#E4D8CF; color:#1E1430;">#E4D8CF</div>
+        </div>
+      </div>
+      <div class="g-label">Violet × Linen</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #8338EC, #EBEBEB);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#8338EC; color:#FFFFFF;">#8338EC</div>
+          <div class="gradient-stop" style="background:#EBEBEB; color:#1E1430;">#EBEBEB</div>
+        </div>
+      </div>
+      <div class="g-label">Violet × Mist</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #3A86FF, #C9B29F);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#3A86FF; color:#FFFFFF;">#3A86FF</div>
+          <div class="gradient-stop" style="background:#C9B29F; color:#1E1430;">#C9B29F</div>
+        </div>
+      </div>
+      <div class="g-label">Azure × Sand</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #3A86FF, #E4D8CF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#3A86FF; color:#FFFFFF;">#3A86FF</div>
+          <div class="gradient-stop" style="background:#E4D8CF; color:#1E1430;">#E4D8CF</div>
+        </div>
+      </div>
+      <div class="g-label">Azure × Linen</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #3A86FF, #EBEBEB);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#3A86FF; color:#FFFFFF;">#3A86FF</div>
+          <div class="gradient-stop" style="background:#EBEBEB; color:#1E1430;">#EBEBEB</div>
+        </div>
+      </div>
+      <div class="g-label">Azure × Mist</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #C9B29F, #E4D8CF);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#C9B29F; color:#1E1430;">#C9B29F</div>
+          <div class="gradient-stop" style="background:#E4D8CF; color:#1E1430;">#E4D8CF</div>
+        </div>
+      </div>
+      <div class="g-label">Sand × Linen</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #C9B29F, #EBEBEB);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#C9B29F; color:#1E1430;">#C9B29F</div>
+          <div class="gradient-stop" style="background:#EBEBEB; color:#1E1430;">#EBEBEB</div>
+        </div>
+      </div>
+      <div class="g-label">Sand × Mist</div>
+    </div>
+    <div class="g-item">
+      <div class="gradient-card">
+        <div class="gradient-preview" style="background: linear-gradient(135deg, #E4D8CF, #EBEBEB);"></div>
+        <div class="gradient-stops">
+          <div class="gradient-stop" style="background:#E4D8CF; color:#1E1430;">#E4D8CF</div>
+          <div class="gradient-stop" style="background:#EBEBEB; color:#1E1430;">#EBEBEB</div>
+        </div>
+      </div>
+      <div class="g-label">Linen × Mist</div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div><strong style="color: var(--dark);">Ricarte.ai</strong> · Palette Guide · 2026 Edition</div>
+  <div class="stamp">6 colors · 30 shades · 15 gradients</div>
+</footer>
+
+</body>
+</html>
