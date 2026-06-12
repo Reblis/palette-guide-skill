@@ -36,9 +36,13 @@ layout, CSS architecture, and component set to reproduce with the input colors.
    lede (weight 400, max-width 770px), uppercase meta line with palette counts.
    **Brand mark:** if the brand has an SVG logo (check its site), inline it sanitized
    (`fill="currentColor"`, white) — see the template's Ricarte logo. If no SVG is
-   available, fall back to a **Pacifico wordmark**: load Pacifico from Google Fonts and
-   set the brand name in it, white, in the title slot.
-4. **Output location:** write the file where the user asks; default `palette-guide.html`
+   available, fall back to a **wordmark set in the brand's own H1/display font** — the
+   heaviest loaded weight, white, with the site's H1 letter-spacing. Never substitute an
+   off-brand face (no Pacifico or other script fallback).
+4. **No header glow.** Never add a `::before` radial-gradient glow blob (e.g.
+   `radial-gradient(circle, rgba(...), transparent 68%)`) to the header band — on any
+   guide, for any brand. The header is a flat color or linear gradient only.
+5. **Output location:** write the file where the user asks; default `palette-guide.html`
    in the relevant project folder. Never stream the HTML into chat.
 
 ## Input handling
