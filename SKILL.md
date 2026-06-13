@@ -42,7 +42,10 @@ layout, CSS architecture, and component set to reproduce with the input colors.
 4. **No header glow.** Never add a `::before` radial-gradient glow blob (e.g.
    `radial-gradient(circle, rgba(...), transparent 68%)`) to the header band — on any
    guide, for any brand. The header is a flat color or linear gradient only.
-5. **Output location:** write the file where the user asks; default `palette-guide.html`
+5. **Label/sample rows are vertically centered.** Family convention across all guide
+   skills: any row pairing a small label with a sample (swatch/ramp/specimen rows) uses
+   `align-items: center`, never `baseline`.
+6. **Output location:** write the file where the user asks; default `palette-guide.html`
    in the relevant project folder. Never stream the HTML into chat.
 
 ## Input handling
