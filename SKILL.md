@@ -71,6 +71,7 @@ layout, CSS architecture, and component set to reproduce with the input colors.
   #3A86FF → "Azure"). Short, evocative, one word.
 - No site to scrape, so the header **brand mark** is a wordmark in a neutral display
   font (or the brand name if the user gave one), and fonts default to the Reblis stack.
+- **Radius** defaults to `--radius: 8px` (the template value) unless the user states one.
 
 ### URL mode
 
@@ -90,6 +91,12 @@ neutral:
   sanitized SVG logo (or the brand's H1-font wordmark fallback) and load the site's fonts,
   exactly like the style-guide and font-guide skills. This is the main reason URL mode
   produces a richer header than hex mode.
+- **Radius:** scrape the site's card/surface `border-radius` into a single `--radius`
+  token and drive every box off it (`border-radius: var(--radius)` on swatches, ramps,
+  gradient cards, header chips; `calc(var(--radius) / 2)` on small dots/code pills). A
+  flat brand (Stratomation, radius 0) must render sharp corners; a rounded brand
+  (Ricarte 8px, Shalom 16px) keeps its curve. Read it from the site's actual card CSS —
+  don't assume 8px.
 - **Re-probe, don't assume:** verify what the live HTML actually serves before trusting a
   pattern from a previous site.
 

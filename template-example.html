@@ -22,6 +22,7 @@
     --dark:   #1E1430;   /* deep anchor derived from violet */
     --paper:  #FFFFFF;
     --page:   #F5F4F7;
+    --radius: 8px;   /* scraped from the site's card border-radius; 0 = flat brand */
 
     --ink:    #232A33;
     --slate:  #585E6A;
@@ -86,7 +87,7 @@
   }
   .header-bar .meta span { color: rgba(255,255,255,0.95); }
   .chip-row { display: flex; gap: 8px; margin-bottom: 26px; }
-  .chip { width: 34px; height: 34px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.35); }
+  .chip { width: 34px; height: 34px; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.35); }
 
   /* ============ NAV ============ */
   .nav {
@@ -126,7 +127,7 @@
 
   /* ============ SWATCHES ============ */
   .swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .swatch { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .swatch { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
   .swatch-color { height: 110px; }
   .swatch-meta { padding: 12px 14px; font-size: 12px; border-top: 1px solid var(--rule-2); }
   .swatch-meta .name { font-weight: 700; color: var(--ink); margin-bottom: 4px; font-size: 14px; }
@@ -135,14 +136,14 @@
 
   /* ============ SHADE RAMPS ============ */
   .ramp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-  .ramp { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); }
+  .ramp { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
   .ramp .ramp-name {
     padding: 10px 14px; font-weight: 700; font-size: 11px;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
     border-bottom: 1px solid var(--rule);
     display: flex; align-items: center; gap: 8px;
   }
-  .ramp .dot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+  .ramp .dot { width: 12px; height: 12px; border-radius: calc(var(--radius) / 2); display: inline-block; }
   .shade {
     padding: 10px 14px;
     display: grid; grid-template-columns: 1fr auto 44px;
@@ -154,7 +155,7 @@
 
   /* ============ GRADIENTS ============ */
   .gradient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .gradient-card { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); }
+  .gradient-card { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
   .gradient-preview { height: 120px; }
   .gradient-stops { display: flex; }
   .gradient-stop {
@@ -171,12 +172,12 @@
     border-left: 4px solid var(--violet);
     background: #EFE7FC;
     padding: 20px 24px;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
     color: var(--dark);
     font-size: 14px; line-height: 1.55;
     margin-top: 32px;
   }
-  .callout code { font-family: var(--mono); background: rgba(131,56,236,0.12); padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+  .callout code { font-family: var(--mono); background: rgba(131,56,236,0.12); padding: 2px 6px; border-radius: calc(var(--radius) / 2); font-size: 12px; }
 
   /* ============ FOOTER ============ */
   footer {
