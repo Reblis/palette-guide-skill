@@ -1,23 +1,34 @@
 ---
 name: palette-guide
 description: >
-  Generate a standalone color-palette guide HTML page from 1–12 hex codes. Invoke with
-  /palette-guide <#hex …> — the skill takes the colors (optionally grouped as primary /
-  secondary and named), and produces a single self-contained HTML file in the Reblis
-  palette-guide layout: gradient header with color chips, sticky anchor nav, swatch cards
-  with HEX + RGB, five-step shade ramps showing both flattened hex and rgba() notation,
-  and a gradient section pairing every color combination. Trigger when the user says
-  "palette guide", "color palette page", "make a palette from these colors", or invokes
-  /palette-guide. Authored by Reblis.com.
+  Generate a standalone color-palette guide HTML page from either 1–12 hex codes OR a
+  website URL. Invoke with /palette-guide <#hex …> to use explicit colors, or
+  /palette-guide <url> to scrape a site's brand palette (same URL handling as the
+  font-guide and style-guide skills). Produces a single self-contained HTML file in the
+  Reblis palette-guide layout: gradient header with color chips, sticky anchor nav, swatch
+  cards with HEX + RGB, five-step shade ramps showing both flattened hex and rgba()
+  notation, and a gradient section pairing every color combination. Trigger when the user
+  says "palette guide", "color palette page", "make a palette from these colors", "palette
+  from this site", or invokes /palette-guide. Authored by Reblis.com.
 ---
 
 # Palette Guide Generator — by Reblis
 
-Generate a **standalone color-palette guide HTML file** from a list of hex colors.
+Generate a **standalone color-palette guide HTML file** from explicit hex colors **or** a
+website URL.
 
-Usage: `/palette-guide #FF006E #8338EC #3A86FF …` — accepts **1 to 12 hex codes**.
-The user may also name the brand, name individual colors, or split them into primary /
-secondary groups; honor whatever structure they give.
+Usage — two input modes, auto-detected from the argument:
+- **Hex mode:** `/palette-guide #FF006E #8338EC #3A86FF …` — accepts **1 to 12 hex codes**.
+  The user may also name the brand, name individual colors, or split them into primary /
+  secondary groups; honor whatever structure they give.
+- **URL mode:** `/palette-guide https://example.com` — scrape the site's brand palette
+  (and its logo + fonts for the header), the same way the font-guide and style-guide
+  skills do.
+
+Detect the mode: if the argument starts with `http(s)://` or looks like a bare domain
+(`example.com`), it's URL mode; otherwise parse it as a hex list. A mixed argument
+("these colors from this site") → scrape the URL, then keep only the hex codes the user
+also named.
 
 The canonical example is `template-example.html` in this skill directory (the Ricarte.ai
 palette: 3 primaries + 3 secondaries). **Read it before generating** — it is the exact
@@ -50,12 +61,37 @@ layout, CSS architecture, and component set to reproduce with the input colors.
 
 ## Input handling
 
+### Hex mode
+
 - Validate each color matches `#?[0-9A-Fa-f]{6}` (accept 3-digit shorthand, expand it).
   Normalize to uppercase `#RRGGBB`.
 - 1–12 colors. If the user gives primary/secondary groups, render two swatch sections;
   otherwise one "Colors" section.
 - **Name the colors** tastefully if the user doesn't (e.g. #FF006E → "Rose",
   #3A86FF → "Azure"). Short, evocative, one word.
+- No site to scrape, so the header **brand mark** is a wordmark in a neutral display
+  font (or the brand name if the user gave one), and fonts default to the Reblis stack.
+
+### URL mode
+
+Fetch the page (curl with a real browser UA; fall back to scrapling stealth if blocked) —
+the same scrape the style-guide skill runs. Extract the **brand palette**, not every
+neutral:
+
+- **Colors:** read CSS custom properties in the stylesheets first (e.g. `--brand`,
+  `--accent`, `--pink`), then computed fills on buttons / links / headers if no tokens
+  exist. Keep the **chromatic brand colors** (primary, secondary, accent) plus at most a
+  couple of signature neutrals — skip the full grey/tint ramp (the guide generates ramps
+  itself). Cap at 12; group as primary / secondary by role when the token names or usage
+  make it obvious.
+- **Names:** derive from the token names where present (`--teal` → "Teal"); otherwise name
+  by hue as in hex mode.
+- **Header mark + fonts:** with a URL you also have the logo and typography — inline the
+  sanitized SVG logo (or the brand's H1-font wordmark fallback) and load the site's fonts,
+  exactly like the style-guide and font-guide skills. This is the main reason URL mode
+  produces a richer header than hex mode.
+- **Re-probe, don't assume:** verify what the live HTML actually serves before trusting a
+  pattern from a previous site.
 
 ## Sections
 
