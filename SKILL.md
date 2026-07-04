@@ -135,12 +135,13 @@ write the file in one shot.
 ## Verify before claiming done
 
 Screenshot headlessly and **look at the images** — header, swatches, ramps, gradients,
-footer:
+footer. Fonts need a `--virtual-time-budget` so Google Fonts actually load before
+capture (a wordmark or label rendering in system sans = the webfont didn't load):
 
 ```bash
 timeout 90 chromium --headless --disable-gpu --no-sandbox \
   --screenshot=check.png --window-size=1400,5200 --hide-scrollbars \
-  "file:///path/to/palette-guide.html"
+  --virtual-time-budget=8000 "file:///path/to/palette-guide.html"
 convert check.png -crop 1400x1750+0+<offset> slice.png
 ```
 
