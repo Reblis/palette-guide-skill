@@ -2,14 +2,17 @@
 name: palette-guide
 description: >
   Generate a standalone color-palette guide HTML page from either 1–12 hex codes OR a
-  website URL. Invoke with /palette-guide <#hex …> to use explicit colors, or
-  /palette-guide <url> to scrape a site's brand palette (same URL handling as the
-  font-guide and style-guide skills). Produces a single self-contained HTML file in the
+  website URL, OR grow full contrast-solved scales from 1–4 seed colors. Invoke with
+  /palette-guide <#hex …> to use explicit colors, /palette-guide <url> to scrape a site's
+  brand palette (same URL handling as the font-guide and style-guide skills), or
+  /palette-guide seed <#hex …> to build 12-step light + dark scales with Adobe Leonardo and
+  Material HCT, with WCAG + APCA contrast printed on every step. Produces a single self-contained HTML file in the
   Reblis palette-guide layout: gradient header with color chips, sticky anchor nav, swatch
   cards with HEX + RGB, five-step shade ramps showing both flattened hex and rgba()
   notation, and a gradient section pairing every color combination. Trigger when the user
   says "palette guide", "color palette page", "make a palette from these colors", "palette
-  from this site", or invokes /palette-guide. Authored by Reblis.com.
+  from this site", "build a palette from this color", "seed palette", "systematic palette",
+  or invokes /palette-guide. Authored by Reblis.com.
 ---
 
 # Palette Guide Generator — by Reblis
@@ -24,8 +27,12 @@ Usage — two input modes, auto-detected from the argument:
 - **URL mode:** `/palette-guide https://example.com` — scrape the site's brand palette
   (and its logo + fonts for the header), the same way the font-guide and style-guide
   skills do.
+- **Seed mode:** `/palette-guide seed #3828F4:Indigo #ED1958:Rose` — 1–4 seed colors grown
+  into full 12-step light + dark scales by two science-based engines. See **Seed mode**
+  below; it has its own generator and its own section list.
 
-Detect the mode: if the argument starts with `http(s)://` or looks like a bare domain
+Detect the mode: if the argument starts with `seed`, or the user asks to *build / grow /
+generate* a palette or scales *from* a color, it's seed mode. Otherwise, if it starts with `http(s)://` or looks like a bare domain
 (`example.com`), it's URL mode; otherwise parse it as a hex list. A mixed argument
 ("these colors from this site") → scrape the URL, then keep only the hex codes the user
 also named.
@@ -125,6 +132,51 @@ in slate grey — "Rose × Violet" style, never labels inside the colored area.
 
 `footer` — brand + guide title left; monospace stamp right ("6 colors · 30 shades · 15
 gradients").
+
+## Seed mode
+
+Seed mode answers "give me a system from this color", not "document these colors". It
+does not use the alpha ramps or the gradient section. It runs a shipped generator:
+
+```bash
+cd ~/.claude/skills/palette-guide && [ -d node_modules ] || npm ci
+node tools/seed_guide.mjs --seed "#3828F4:Indigo" [--seed "#ED1958:Rose"] \
+  --brand "Reblis" --out /path/to/palette-guide.html [--json scales.json] \
+  [--font Inter] [--radius 8] [--neutral-chroma 5]
+```
+
+How it builds the scales (state this to the user; it is the point of the mode):
+
+- **Targets come from Radix Colors.** The contrast of each Radix `blue` step against its
+  own step 1 (and `slate` for the neutral, and the `*Dark` scales for dark mode) is the
+  target curve. So a generated scale behaves like a Radix scale, and the role of each step
+  is fixed: 1–2 backgrounds, 3–5 component fills, 6–8 borders, 9–10 solid, 11–12 text.
+- **Step 9 is always the seed, exactly**, in both modes.
+- **Leonardo** (`@adobe/leonardo-contrast-colors`) interpolates the seed through **OKLCH**
+  and picks the color at each target ratio. Plain LCH drifts blues toward purple; don't
+  switch it back.
+- **HCT** (`@material/material-color-utilities`, **pinned to 0.3.0**, because the 0.4.0 npm build
+  won't import in Node) holds the seed's hue + chroma and solves **tone** for each target
+  with Material's `Contrast` utilities.
+- **Chroma envelope:** both engines are then capped per step at the fraction of step-9
+  chroma that Radix blue keeps (steps 1–2 and 12 are muted). Capping at a fixed tone never
+  changes luminance, so no ratio moves. Validation: seeding `#0090FF` reproduces Radix
+  blue closely, e.g. HCT light 11 `#0373CD` vs Radix `#0D74CE`, dark 3 `#0E2948` vs `#0D2847`.
+- **Neutral** is the first seed's hue at low chroma (default 5), solved on the slate curve.
+- **Seeds that don't fit step 9** are handled, not hidden, and a note prints under the scale:
+  a faint seed (a pale signal like Volt) compresses steps 2–8 beneath it and is flagged
+  fill-only; a text-strong seed (a dark anchor like Denim) pushes 10–12 darker so the scale stays in order.
+
+Sections (all generated): header (chips = the first seed's light scale) · `01 Seeds`
+(HEX/RGB, HCT, OKLCH, ratio vs white/black, which text goes on it, nearest Radix scale with
+ΔE) · `02 Light Scales` and `03 Dark Scales` (Leonardo row + HCT row per seed, plus the
+neutral, role bands above, **ratio vs page + AA/AAA/3:1 badge on every step**) ·
+`04 Text Pairings` (text steps × background steps, WCAG ratio + APCA Lc per cell, both
+engines) · `05 Tokens` (copyable CSS custom properties, light + `prefers-color-scheme`
+dark, one block per engine). Example: `seed-example.html` (Reblis Indigo + Rose).
+
+Hard rules 1–6 above still apply. When the user names a brand with a site, pass its
+display font via `--font` and its card radius via `--radius`.
 
 ## Generate programmatically
 

@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reblis · Seed Palette</title>
+<meta name="description" content="Reblis seed palette — 12-step light and dark scales solved by Adobe Leonardo and Material HCT, with contrast ratios on every step.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS ============ */
+  :root {
+    --rose:   #FF006E;
+    --violet: #8338EC;
+    --azure:  #3A86FF;
+    --sand:   #C9B29F;
+    --linen:  #E4D8CF;
+    --mist:   #EBEBEB;
+
+    --dark:   #1E1430;   /* deep anchor derived from violet */
+    --paper:  #FFFFFF;
+    --page:   #F5F4F7;
+    --radius: 8px;   /* scraped from the site's card border-radius; 0 = flat brand */
+
+    --ink:    #232A33;
+    --slate:  #585E6A;
+    --mid:    #686E77;
+    --rule:   #DFDCE5;
+    --rule-2: #EEECF2;
+
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .page { max-width: 1240px; margin: 0 auto; padding: 0 24px 120px; }
+  @media (min-width: 760px)  { .page { padding: 0 40px 120px; } }
+  @media (min-width: 1200px) { .page { padding: 0 25px 120px; } }
+
+  /* ============ HEADER ============ */
+  .header-bar {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 60px 24px 76px;
+    background: var(--dark);
+    background-image: linear-gradient(135deg, var(--rose) 0%, var(--violet) 52%, var(--dark) 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-bar::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 5px;
+    background: var(--azure);
+  }
+  .header-bar .inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; position: relative; }
+  .header-bar .kicker {
+    font-weight: 700; font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 14px;
+  }
+  .header-bar .brandmark {
+    height: 58px; width: auto; display: block; margin: 0 0 24px;
+  }
+  .header-bar p.lede {
+    font-weight: 400; font-size: 17px; line-height: 1.55;
+    color: rgba(255,255,255,0.88); max-width: 770px; margin: 0 0 24px;
+  }
+  .header-bar .meta {
+    font-size: 12px; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.6); text-transform: uppercase;
+  }
+  .header-bar .meta span { color: rgba(255,255,255,0.95); }
+  .chip-row { display: flex; gap: 8px; margin-bottom: 26px; }
+  .chip { width: 34px; height: 34px; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.35); }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 56px;
+  }
+  .nav-inner {
+    max-width: 1240px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center;
+  }
+  .nav-brand { font-weight: 700; font-size: 13px; letter-spacing: 0.02em; color: var(--dark); margin-right: auto; }
+  .nav-brand .pf { color: var(--rose); }
+  .nav a {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--slate); text-decoration: none; font-weight: 600;
+    padding: 4px 0; border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .nav a:hover { color: var(--violet); border-bottom-color: var(--rose); }
+
+  /* ============ SECTION ============ */
+  section { margin-bottom: 96px; }
+  section > h2 {
+    font-weight: 700; font-size: 12px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--rose); margin: 0 0 8px;
+  }
+  section > h2 + .section-title {
+    font-weight: 700;
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--dark); margin: 0 0 12px;
+  }
+  section > .section-blurb { color: var(--slate); font-size: 15px; max-width: 720px; margin: 0 0 32px; }
+
+  /* ============ SWATCHES ============ */
+  .swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .swatch { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
+  .swatch-color { height: 110px; }
+  .swatch-meta { padding: 12px 14px; font-size: 12px; border-top: 1px solid var(--rule-2); }
+  .swatch-meta .name { font-weight: 700; color: var(--ink); margin-bottom: 4px; font-size: 14px; }
+  .swatch-meta .role { color: var(--mid); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+  .swatch-meta .hex { font-family: var(--mono); color: var(--slate); font-size: 11px; line-height: 1.7; }
+
+  /* ============ SHADE RAMPS ============ */
+  .ramp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .ramp { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
+  .ramp .ramp-name {
+    padding: 10px 14px; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ramp .dot { width: 12px; height: 12px; border-radius: calc(var(--radius) / 2); display: inline-block; }
+  .shade {
+    padding: 10px 14px;
+    display: grid; grid-template-columns: 1fr auto 44px;
+    gap: 10px; align-items: center;
+    font-family: var(--mono); font-size: 11px;
+  }
+  .shade .sh-rgba { opacity: 0.75; }
+  .shade .sh-pct { opacity: 0.7; text-align: right; }
+
+  /* ============ GRADIENTS ============ */
+  .gradient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .gradient-card { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
+  .gradient-preview { height: 120px; }
+  .gradient-stops { display: flex; }
+  .gradient-stop {
+    flex: 1; padding: 9px 12px;
+    font-family: var(--mono); font-size: 11px; text-align: center;
+  }
+  .g-label {
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--slate); margin-top: 12px; text-align: center;
+  }
+
+  /* ============ CALLOUT ============ */
+  .callout {
+    border-left: 4px solid var(--violet);
+    background: #EFE7FC;
+    padding: 20px 24px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--dark);
+    font-size: 14px; line-height: 1.55;
+    margin-top: 32px;
+  }
+  .callout code { font-family: var(--mono); background: rgba(131,56,236,0.12); padding: 2px 6px; border-radius: calc(var(--radius) / 2); font-size: 12px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 40px 15px 32px; border-top: 1px solid var(--rule);
+    color: var(--mid); font-size: 13px;
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+  }
+  footer .stamp { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; }
+
+  @media (max-width: 760px) {
+    .shade { grid-template-columns: 1fr auto; }
+    .shade .sh-rgba { display: none; }
+  }
+
+  :root { --dark: #282675; --page: #FBF7FD; --ink: #1F1E23; --slate: #646268; --mid: #646268; --rule: #DBD7DD; --rule-2: #EAE6EC; }
+  .header-bar { background-image: linear-gradient(135deg, #3828F4 0%, #342ACA 52%, #151426 100%); }
+  .header-bar::after { background: #ED1958; }
+  section > h2, .nav-brand .pf { color: #342ACA; }
+  .nav a:hover { color: #282675; border-bottom-color: #3828F4; }
+  .callout { border-left-color: #3828F4; background: #F1EEFF; color: #282675; }
+  .callout code { background: #DEDBFF; }
+
+  .scard > .ramp-name, .mx-wrap > .ramp-name {
+    padding: 10px 14px; font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid); border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 8px; }
+  .scard .dot { width: 12px; height: 12px; border-radius: calc(var(--radius) / 2); display: inline-block; }
+  .seed-meta { font-family: var(--mono); font-size: 11px; color: var(--slate); line-height: 1.7; }
+  .seed-meta b { color: var(--ink); font-weight: 600; }
+  .scale-stack { display: grid; gap: 20px; }
+  .scard { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); padding-bottom: 14px; }
+  .scard-dark { background: #16161A; border-color: #3D3C41; }
+  .scard-dark .ramp-name, .scard-dark .srow-l, .scard-dark .roles span, .scard-dark .snote { color: #BAB7BD; border-color: #3D3C41; }
+  .srow { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; padding: 8px 14px 0; }
+  .srow-l { font-size: 12px; font-weight: 700; color: var(--ink); }
+  .srow-l small { display: block; font-weight: 500; font-size: 10px; color: var(--mid); letter-spacing: .04em; text-transform: uppercase; }
+  .scard-dark .srow-l small { color: #807E83; }
+  .roles { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+  .roles span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); border-top: 2px solid var(--rule); padding-top: 4px; text-align: center; }
+  .strip { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+  .st { min-width: 0; overflow: hidden; min-height: 76px; border-radius: calc(var(--radius) / 2); padding: 7px 6px; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--mono); font-size: 10px; line-height: 1.3; }
+  .st-n { font-weight: 700; font-family: var(--sans); font-size: 12px; }
+  .st-r b, .mx b { font-family: var(--sans); font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px; letter-spacing: .04em; }
+  .b-aaa { background: #1B7F3A; color: #fff; } .b-aa { background: #2F6FD6; color: #fff; } .b-ui { background: #8A6100; color: #fff; }
+  .snote { margin: 12px 14px 0; font-size: 12px; color: var(--slate); }
+  .mx-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 20px; }
+  .mx-wrap { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
+  .mx-scroll { overflow-x: auto; }
+  .mx { border-collapse: separate; border-spacing: 3px; width: 100%; padding: 8px; font-size: 11px; }
+  .mx th { font-weight: 600; color: var(--slate); text-align: left; padding: 4px 6px; white-space: nowrap; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+  .mx-sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; border: 1px solid var(--rule); vertical-align: -1px; }
+  .mx td { padding: 8px; border-radius: calc(var(--radius) / 2); font-family: var(--mono); vertical-align: middle; }
+  .mx td strong { display: block; font-family: var(--sans); font-size: 18px; line-height: 1.1; }
+  .mx td span { display: block; }
+  .mx td .lc { opacity: .8; }
+  .tok { position: relative; background: #1D1D21; color: #F6F2F8; border-radius: var(--radius); padding: 18px 20px; font-family: var(--mono); font-size: 12px; line-height: 1.6; max-height: 360px; overflow: auto; white-space: pre; }
+  .tok-head { display: flex; align-items: center; justify-content: space-between; margin: 24px 0 8px; font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mid); }
+  .copy { font: 600 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: calc(var(--radius) / 2); padding: 6px 10px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+  .copy svg { width: 14px; height: 14px; }
+  @media (max-width: 900px) {
+    .srow { grid-template-columns: 1fr; }
+    .strip, .roles { grid-template-columns: repeat(6, 1fr); }
+    .roles { display: none; }
+    .mx-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .strip { grid-template-columns: repeat(4, 1fr); }
+    .st { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header-bar">
+  <div class="inner">
+    <div class="kicker">Palette Guide · Seed Mode · 2026 Edition</div>
+    <div class="brandmark" style="height:auto;font:800 56px/1 var(--sans);letter-spacing:-0.02em;">Reblis</div>
+    <div class="chip-row"><div class="chip" style="background:#FEFAFF;"></div><div class="chip" style="background:#FAF6FF;"></div><div class="chip" style="background:#F1EEFF;"></div><div class="chip" style="background:#EAE7FF;"></div><div class="chip" style="background:#DEDBFF;"></div><div class="chip" style="background:#CECCFF;"></div><div class="chip" style="background:#BBBAFF;"></div><div class="chip" style="background:#9F9FFF;"></div><div class="chip" style="background:#3828F4;"></div><div class="chip" style="background:#3426E5;"></div><div class="chip" style="background:#342ACA;"></div><div class="chip" style="background:#282675;"></div></div>
+    <p class="lede">2 seed colors, grown into full 12-step light and dark scales by two engines aiming at the same contrast targets. Every step shows its contrast against the page, so which pairings pass is a lookup, not a judgment call.</p>
+    <p class="meta">Seeds <span>2</span> &nbsp;·&nbsp; Engines <span>2</span> &nbsp;·&nbsp; Steps <span>144</span></p>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand"><span class="pf">Reblis</span> · Seed Palette</span>
+    <a href="#seeds">Seeds</a>
+    <a href="#light">Light</a>
+    <a href="#dark">Dark</a>
+    <a href="#pairings">Pairings</a>
+    <a href="#tokens">Tokens</a>
+  </div>
+</nav>
+
+<div class="page">
+
+<section id="seeds">
+  <h2>01 · Seeds</h2>
+  <div class="section-title">Where the Scales Start</div>
+  <p class="section-blurb">Each seed becomes step 9, the solid brand fill, in both modes. HCT and OKLCH describe it in perceptual terms; HSL hue is not shown because it misreports dark colors.</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#3828F4; color:#FFFFFF; display:flex; align-items:flex-end; padding:12px 14px; font-weight:700;">Aa</div>
+      <div class="swatch-meta">
+        <div class="name">Indigo</div>
+        <div class="role">Seed · step 9</div>
+        <div class="hex">HEX #3828F4 · RGB 56 40 244</div>
+        <div class="seed-meta">HCT <b>286.1° · C82.4 · T35.8</b><br>
+        OKLCH <b>47.6% 0.277 271.9°</b><br>
+        vs white <b>7.56</b> · vs black <b>2.78</b> · text on it <b>white</b><br>
+        Nearest Radix <b>indigo</b> (#3E63DD, ΔE 11.1)</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#ED1958; color:#111111; display:flex; align-items:flex-end; padding:12px 14px; font-weight:700;">Aa</div>
+      <div class="swatch-meta">
+        <div class="name">Rose</div>
+        <div class="role">Seed · step 9</div>
+        <div class="hex">HEX #ED1958 · RGB 237 25 88</div>
+        <div class="seed-meta">HCT <b>11.5° · C96.0 · T51.2</b><br>
+        OKLCH <b>60.9% 0.234 13.5°</b><br>
+        vs white <b>4.30</b> · vs black <b>4.88</b> · text on it <b>dark</b><br>
+        Nearest Radix <b>ruby</b> (#E54666, ΔE 4.4)</div>
+      </div>
+    </div></div>
+</section>
+
+<section id="light">
+  <h2>02 · Light Scales</h2>
+  <div class="section-title">Twelve Steps, Twelve Jobs</div>
+  <p class="section-blurb">The number under each hex is its WCAG contrast against the page background (step 1 of the neutral). <b>3:1</b> passes for UI parts and large text, <b>AA</b> is 4.5:1 body text, <b>AAA</b> is 7:1.</p>
+  <div class="scale-stack"><div class="scard scard-light">
+    <div class="ramp-name"><span class="dot" style="background:#3828F4"></span>Indigo · #3828F4</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#F9FAFF;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#F9FAFF</span>
+        <span class="st-r">1.01</span>
+      </div><div class="st" style="background:#F5F8FF;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#F5F8FF</span>
+        <span class="st-r">1.03</span>
+      </div><div class="st" style="background:#EBF0FF;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#EBF0FF</span>
+        <span class="st-r">1.10</span>
+      </div><div class="st" style="background:#E1E9FF;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#E1E9FF</span>
+        <span class="st-r">1.17</span>
+      </div><div class="st" style="background:#D3DEFF;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#D3DEFF</span>
+        <span class="st-r">1.30</span>
+      </div><div class="st" style="background:#C1D0FF;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#C1D0FF</span>
+        <span class="st-r">1.48</span>
+      </div><div class="st" style="background:#ABBEFF;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#ABBEFF</span>
+        <span class="st-r">1.76</span>
+      </div><div class="st" style="background:#8CA4FF;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#8CA4FF</span>
+        <span class="st-r">2.29</span>
+      </div><div class="st" style="background:#3828F4;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#3828F4</span>
+        <span class="st-r">7.31 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#3726E5;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#3726E5</span>
+        <span class="st-r">7.89 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#392ACA;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#392ACA</span>
+        <span class="st-r">8.61 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#2C2675;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#2C2675</span>
+        <span class="st-r">12.37 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#FEFAFF;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#FEFAFF</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#FAF6FF;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#FAF6FF</span>
+        <span class="st-r">1.03</span>
+      </div><div class="st" style="background:#F1EEFF;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#F1EEFF</span>
+        <span class="st-r">1.10</span>
+      </div><div class="st" style="background:#EAE7FF;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#EAE7FF</span>
+        <span class="st-r">1.17</span>
+      </div><div class="st" style="background:#DEDBFF;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#DEDBFF</span>
+        <span class="st-r">1.30</span>
+      </div><div class="st" style="background:#CECCFF;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#CECCFF</span>
+        <span class="st-r">1.48</span>
+      </div><div class="st" style="background:#BBBAFF;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#BBBAFF</span>
+        <span class="st-r">1.76</span>
+      </div><div class="st" style="background:#9F9FFF;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#9F9FFF</span>
+        <span class="st-r">2.29</span>
+      </div><div class="st" style="background:#3828F4;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#3828F4</span>
+        <span class="st-r">7.32 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#3426E5;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#3426E5</span>
+        <span class="st-r">7.96 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#342ACA;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#342ACA</span>
+        <span class="st-r">8.73 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#282675;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#282675</span>
+        <span class="st-r">12.52 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    <p class="snote">Seed already passes as text on this background, so steps 10–12 are pushed darker to keep the scale in order. Solid fills take on-color text.</p>
+  </div><div class="scard scard-light">
+    <div class="ramp-name"><span class="dot" style="background:#ED1958"></span>Rose · #ED1958</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#FFF8F9;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#FFF8F9</span>
+        <span class="st-r">1.01</span>
+      </div><div class="st" style="background:#FFF4F5;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#FFF4F5</span>
+        <span class="st-r">1.04</span>
+      </div><div class="st" style="background:#FFEAEB;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#FFEAEB</span>
+        <span class="st-r">1.11</span>
+      </div><div class="st" style="background:#FFE2E4;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#FFE2E4</span>
+        <span class="st-r">1.18</span>
+      </div><div class="st" style="background:#FFD4D7;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#FFD4D7</span>
+        <span class="st-r">1.30</span>
+      </div><div class="st" style="background:#FFC1C6;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#FFC1C6</span>
+        <span class="st-r">1.48</span>
+      </div><div class="st" style="background:#FFA9B1;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#FFA9B1</span>
+        <span class="st-r">1.76</span>
+      </div><div class="st" style="background:#FD8392;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#FD8392</span>
+        <span class="st-r">2.30</span>
+      </div><div class="st" style="background:#ED1958;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#ED1958</span>
+        <span class="st-r">4.16 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#E31D56;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#E31D56</span>
+        <span class="st-r">4.43 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#D72B54;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#D72B54</span>
+        <span class="st-r">4.65 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#651109;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#651109</span>
+        <span class="st-r">12.39 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#FFFAF9;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#FFFAF9</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#FFF5F5;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#FFF5F5</span>
+        <span class="st-r">1.04</span>
+      </div><div class="st" style="background:#FFECEC;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#FFECEC</span>
+        <span class="st-r">1.10</span>
+      </div><div class="st" style="background:#FFE3E4;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#FFE3E4</span>
+        <span class="st-r">1.17</span>
+      </div><div class="st" style="background:#FFD4D8;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#FFD4D8</span>
+        <span class="st-r">1.30</span>
+      </div><div class="st" style="background:#FFC2C7;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#FFC2C7</span>
+        <span class="st-r">1.47</span>
+      </div><div class="st" style="background:#FFA9B2;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#FFA9B2</span>
+        <span class="st-r">1.76</span>
+      </div><div class="st" style="background:#FF8293;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#FF8293</span>
+        <span class="st-r">2.29</span>
+      </div><div class="st" style="background:#ED1958;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#ED1958</span>
+        <span class="st-r">4.17 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#E31D55;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#E31D55</span>
+        <span class="st-r">4.45 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#D62A55;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#D62A55</span>
+        <span class="st-r">4.70 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#660C23;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#660C23</span>
+        <span class="st-r">12.38 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    
+  </div><div class="scard scard-light">
+    <div class="ramp-name"><span class="dot" style="background:#8E8B91"></span>Neutral · hue 286°, chroma 5</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#FBFBFB;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#FBFBFB</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#F8F7F8;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#F8F7F8</span>
+        <span class="st-r">1.03</span>
+      </div><div class="st" style="background:#EEEEEF;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#EEEEEF</span>
+        <span class="st-r">1.12</span>
+      </div><div class="st" style="background:#E7E7E8;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#E7E7E8</span>
+        <span class="st-r">1.19</span>
+      </div><div class="st" style="background:#E0DFE1;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#E0DFE1</span>
+        <span class="st-r">1.28</span>
+      </div><div class="st" style="background:#D9D8DA;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#D9D8DA</span>
+        <span class="st-r">1.37</span>
+      </div><div class="st" style="background:#CECDCF;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#CECDCF</span>
+        <span class="st-r">1.53</span>
+      </div><div class="st" style="background:#BBBABD;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#BBBABD</span>
+        <span class="st-r">1.87</span>
+      </div><div class="st" style="background:#8E8C91;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#8E8C91</span>
+        <span class="st-r">3.22 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#838187;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#838187</span>
+        <span class="st-r">3.72 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#646368;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#646368</span>
+        <span class="st-r">5.75 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#1F1E23;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#1F1E23</span>
+        <span class="st-r">16.00 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#FEFAFF;color:#111111">
+        <span class="st-n">1</span>
+        <span class="st-hex">#FEFAFF</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#FBF7FD;color:#111111">
+        <span class="st-n">2</span>
+        <span class="st-hex">#FBF7FD</span>
+        <span class="st-r">1.03</span>
+      </div><div class="st" style="background:#F2EEF4;color:#111111">
+        <span class="st-n">3</span>
+        <span class="st-hex">#F2EEF4</span>
+        <span class="st-r">1.11</span>
+      </div><div class="st" style="background:#EAE6EC;color:#111111">
+        <span class="st-n">4</span>
+        <span class="st-hex">#EAE6EC</span>
+        <span class="st-r">1.19</span>
+      </div><div class="st" style="background:#E2DFE5;color:#111111">
+        <span class="st-n">5</span>
+        <span class="st-hex">#E2DFE5</span>
+        <span class="st-r">1.28</span>
+      </div><div class="st" style="background:#DBD7DD;color:#111111">
+        <span class="st-n">6</span>
+        <span class="st-hex">#DBD7DD</span>
+        <span class="st-r">1.38</span>
+      </div><div class="st" style="background:#CFCCD2;color:#111111">
+        <span class="st-n">7</span>
+        <span class="st-hex">#CFCCD2</span>
+        <span class="st-r">1.54</span>
+      </div><div class="st" style="background:#BCB9BF;color:#111111">
+        <span class="st-n">8</span>
+        <span class="st-hex">#BCB9BF</span>
+        <span class="st-r">1.88</span>
+      </div><div class="st" style="background:#8E8B91;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#8E8B91</span>
+        <span class="st-r">3.25 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#838187;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#838187</span>
+        <span class="st-r">3.73 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#646268;color:#FFFFFF">
+        <span class="st-n">11</span>
+        <span class="st-hex">#646268</span>
+        <span class="st-r">5.83 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#1F1E23;color:#FFFFFF">
+        <span class="st-n">12</span>
+        <span class="st-hex">#1F1E23</span>
+        <span class="st-r">16.03 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    
+  </div></div>
+  <div class="callout"><strong>How these were solved.</strong> Both engines chase the same targets: the contrast curve measured off Radix Colors (<code>blue</code> for accents, <code>slate</code> for the neutral). <strong>Leonardo</strong> interpolates the seed through OKLCH and picks the color that lands on each ratio. <strong>HCT</strong> keeps the seed's hue and chroma fixed and solves only tone (tone = L*, so contrast is a function of tone distance). Where they disagree, it is in how much color each step keeps, not in how much contrast it has.</div>
+</section>
+
+<section id="dark">
+  <h2>03 · Dark Scales</h2>
+  <div class="section-title">Same Jobs, Inverted</div>
+  <p class="section-blurb">Solved against a dark page with the dark Radix curve. Step 9 stays the seed so the brand fill is identical across modes.</p>
+  <div class="scale-stack"><div class="scard scard-dark">
+    <div class="ramp-name"><span class="dot" style="background:#3828F4"></span>Indigo · #3828F4</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#181426;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#181426</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#19142A;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#19142A</span>
+        <span class="st-r">1.01</span>
+      </div><div class="st" style="background:#22174A;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#22174A</span>
+        <span class="st-r">1.11</span>
+      </div><div class="st" style="background:#261668;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#261668</span>
+        <span class="st-r">1.20</span>
+      </div><div class="st" style="background:#291D79;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#291D79</span>
+        <span class="st-r">1.33</span>
+      </div><div class="st" style="background:#2E268A;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#2E268A</span>
+        <span class="st-r">1.51</span>
+      </div><div class="st" style="background:#37309D;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#37309D</span>
+        <span class="st-r">1.78</span>
+      </div><div class="st" style="background:#403ABC;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#403ABC</span>
+        <span class="st-r">2.19</span>
+      </div><div class="st" style="background:#3828F4;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#3828F4</span>
+        <span class="st-r">2.38</span>
+      </div><div class="st" style="background:#403FE7;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#403FE7</span>
+        <span class="st-r">2.64</span>
+      </div><div class="st" style="background:#9BB0FF;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#9BB0FF</span>
+        <span class="st-r">8.62 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#D7E1FF;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#D7E1FF</span>
+        <span class="st-r">13.81 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#151426;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#151426</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#16162B;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#16162B</span>
+        <span class="st-r">1.02</span>
+      </div><div class="st" style="background:#1A194C;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#1A194C</span>
+        <span class="st-r">1.11</span>
+      </div><div class="st" style="background:#1D1A6A;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#1D1A6A</span>
+        <span class="st-r">1.21</span>
+      </div><div class="st" style="background:#23207B;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#23207B</span>
+        <span class="st-r">1.34</span>
+      </div><div class="st" style="background:#2B288B;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#2B288B</span>
+        <span class="st-r">1.53</span>
+      </div><div class="st" style="background:#35329F;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#35329F</span>
+        <span class="st-r">1.81</span>
+      </div><div class="st" style="background:#403CBD;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#403CBD</span>
+        <span class="st-r">2.23</span>
+      </div><div class="st" style="background:#3828F4;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#3828F4</span>
+        <span class="st-r">2.39</span>
+      </div><div class="st" style="background:#463FE7;color:#FFFFFF">
+        <span class="st-n">10</span>
+        <span class="st-hex">#463FE7</span>
+        <span class="st-r">2.69</span>
+      </div><div class="st" style="background:#ADADFF;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#ADADFF</span>
+        <span class="st-r">8.76 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#E3E0FF;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#E3E0FF</span>
+        <span class="st-r">14.07 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    <p class="snote">Seed is faint against this background: fill-only, never text. Steps 2–8 compressed beneath it.</p>
+  </div><div class="scard scard-dark">
+    <div class="ramp-name"><span class="dot" style="background:#ED1958"></span>Rose · #ED1958</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#270E0A;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#270E0A</span>
+        <span class="st-r">1.01</span>
+      </div><div class="st" style="background:#2E100C;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#2E100C</span>
+        <span class="st-r">1.03</span>
+      </div><div class="st" style="background:#4E120C;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#4E120C</span>
+        <span class="st-r">1.21</span>
+      </div><div class="st" style="background:#66120A;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#66120A</span>
+        <span class="st-r">1.42</span>
+      </div><div class="st" style="background:#7B1916;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#7B1916</span>
+        <span class="st-r">1.71</span>
+      </div><div class="st" style="background:#912228;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#912228</span>
+        <span class="st-r">2.11</span>
+      </div><div class="st" style="background:#AA2C3C;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#AA2C3C</span>
+        <span class="st-r">2.69</span>
+      </div><div class="st" style="background:#CB3554;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#CB3554</span>
+        <span class="st-r">3.58 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#ED1958;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#ED1958</span>
+        <span class="st-r">4.19 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#F86079;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#F86079</span>
+        <span class="st-r">5.95 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#FF94A0;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#FF94A0</span>
+        <span class="st-r">8.57 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#FFD8DB;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#FFD8DB</span>
+        <span class="st-r">13.80 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#280E12;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#280E12</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#2F1115;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#2F1115</span>
+        <span class="st-r">1.04</span>
+      </div><div class="st" style="background:#4F121E;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#4F121E</span>
+        <span class="st-r">1.24</span>
+      </div><div class="st" style="background:#690E25;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#690E25</span>
+        <span class="st-r">1.45</span>
+      </div><div class="st" style="background:#7D172F;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#7D172F</span>
+        <span class="st-r">1.75</span>
+      </div><div class="st" style="background:#92203A;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#92203A</span>
+        <span class="st-r">2.14</span>
+      </div><div class="st" style="background:#AB2C47;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#AB2C47</span>
+        <span class="st-r">2.73</span>
+      </div><div class="st" style="background:#CD3657;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#CD3657</span>
+        <span class="st-r">3.66 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#ED1958;color:#111111">
+        <span class="st-n">9</span>
+        <span class="st-hex">#ED1958</span>
+        <span class="st-r">4.19 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#FF5C7A;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#FF5C7A</span>
+        <span class="st-r">6.07 <b class="b-aa">AA</b></span>
+      </div><div class="st" style="background:#FF97A4;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#FF97A4</span>
+        <span class="st-r">8.78 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#FFDADD;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#FFDADD</span>
+        <span class="st-r">14.03 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    
+  </div><div class="scard scard-dark">
+    <div class="ramp-name"><span class="dot" style="background:#727076"></span>Neutral · hue 286°, chroma 5</div>
+    <div class="srow srow-roles"><div class="srow-l"></div><div class="roles"><span style="grid-column:1/3">Backgrounds</span><span style="grid-column:3/6">Component</span><span style="grid-column:6/9">Borders</span><span style="grid-column:9/11">Solid</span><span style="grid-column:11/13">Text</span></div></div><div class="srow"><div class="srow-l">Leonardo<small>contrast-solved</small></div><div class="strip"><div class="st" style="background:#17161A;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#17161A</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#1C1B1F;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#1C1B1F</span>
+        <span class="st-r">1.05</span>
+      </div><div class="st" style="background:#27252A;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#27252A</span>
+        <span class="st-r">1.19</span>
+      </div><div class="st" style="background:#2E2C31;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#2E2C31</span>
+        <span class="st-r">1.30</span>
+      </div><div class="st" style="background:#333237;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#333237</span>
+        <span class="st-r">1.42</span>
+      </div><div class="st" style="background:#3D3B40;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#3D3B40</span>
+        <span class="st-r">1.63</span>
+      </div><div class="st" style="background:#4B494E;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#4B494E</span>
+        <span class="st-r">2.03</span>
+      </div><div class="st" style="background:#636267;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#636267</span>
+        <span class="st-r">2.98</span>
+      </div><div class="st" style="background:#716F75;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#716F75</span>
+        <span class="st-r">3.63 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#7E7C82;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#7E7C82</span>
+        <span class="st-r">4.37 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#B8B6BA;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#B8B6BA</span>
+        <span class="st-r">8.95 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#F2F1F2;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#F2F1F2</span>
+        <span class="st-r">15.98 <b class="b-aaa">AAA</b></span>
+      </div></div></div><div class="srow"><div class="srow-l">HCT<small>tone-solved</small></div><div class="strip"><div class="st" style="background:#16161A;color:#FFFFFF">
+        <span class="st-n">1</span>
+        <span class="st-hex">#16161A</span>
+        <span class="st-r">1.00</span>
+      </div><div class="st" style="background:#1D1D21;color:#FFFFFF">
+        <span class="st-n">2</span>
+        <span class="st-hex">#1D1D21</span>
+        <span class="st-r">1.07</span>
+      </div><div class="st" style="background:#26252A;color:#FFFFFF">
+        <span class="st-n">3</span>
+        <span class="st-hex">#26252A</span>
+        <span class="st-r">1.19</span>
+      </div><div class="st" style="background:#2D2D31;color:#FFFFFF">
+        <span class="st-n">4</span>
+        <span class="st-hex">#2D2D31</span>
+        <span class="st-r">1.32</span>
+      </div><div class="st" style="background:#343438;color:#FFFFFF">
+        <span class="st-n">5</span>
+        <span class="st-hex">#343438</span>
+        <span class="st-r">1.46</span>
+      </div><div class="st" style="background:#3D3C41;color:#FFFFFF">
+        <span class="st-n">6</span>
+        <span class="st-hex">#3D3C41</span>
+        <span class="st-r">1.65</span>
+      </div><div class="st" style="background:#4B4A4F;color:#FFFFFF">
+        <span class="st-n">7</span>
+        <span class="st-hex">#4B4A4F</span>
+        <span class="st-r">2.05</span>
+      </div><div class="st" style="background:#646368;color:#FFFFFF">
+        <span class="st-n">8</span>
+        <span class="st-hex">#646368</span>
+        <span class="st-r">3.03 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#727076;color:#FFFFFF">
+        <span class="st-n">9</span>
+        <span class="st-hex">#727076</span>
+        <span class="st-r">3.69 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#807E83;color:#111111">
+        <span class="st-n">10</span>
+        <span class="st-hex">#807E83</span>
+        <span class="st-r">4.49 <b class="b-ui">3:1</b></span>
+      </div><div class="st" style="background:#BAB7BD;color:#111111">
+        <span class="st-n">11</span>
+        <span class="st-hex">#BAB7BD</span>
+        <span class="st-r">9.10 <b class="b-aaa">AAA</b></span>
+      </div><div class="st" style="background:#F6F2F8;color:#111111">
+        <span class="st-n">12</span>
+        <span class="st-hex">#F6F2F8</span>
+        <span class="st-r">16.30 <b class="b-aaa">AAA</b></span>
+      </div></div></div>
+    
+  </div></div>
+</section>
+
+<section id="pairings">
+  <h2>04 · Text Pairings</h2>
+  <div class="section-title">What Text Can Sit Where</div>
+  <p class="section-blurb">Indigo's text steps on every background step, light mode. Each cell shows the WCAG ratio and the APCA lightness contrast (Lc). APCA guides: Lc 75 for body text, 60 for content, 45 for headlines.</p>
+  <div class="mx-grid">
+    <div class="mx-scroll"><div class="mx-wrap"><div class="ramp-name">Leonardo</div><table class="mx"><tr><th></th><th><span class="mx-sw" style="background:#FBFBFB"></span>Page</th><th><span class="mx-sw" style="background:#F8F7F8"></span>Subtle</th><th><span class="mx-sw" style="background:#EBF0FF"></span>Accent 3</th><th><span class="mx-sw" style="background:#E1E9FF"></span>Accent 4</th><th><span class="mx-sw" style="background:#D3DEFF"></span>Accent 5</th></tr><tr><th>Accent 11</th><td style="background:#FBFBFB;color:#392ACA"><strong>Aa</strong><span>8.61 <b class="b-aaa">AAA</b></span><span class="lc">Lc 87</span></td><td style="background:#F8F7F8;color:#392ACA"><strong>Aa</strong><span>8.33 <b class="b-aaa">AAA</b></span><span class="lc">Lc 85</span></td><td style="background:#EBF0FF;color:#392ACA"><strong>Aa</strong><span>7.82 <b class="b-aaa">AAA</b></span><span class="lc">Lc 80</span></td><td style="background:#E1E9FF;color:#392ACA"><strong>Aa</strong><span>7.34 <b class="b-aaa">AAA</b></span><span class="lc">Lc 76</span></td><td style="background:#D3DEFF;color:#392ACA"><strong>Aa</strong><span>6.64 <b class="b-aa">AA</b></span><span class="lc">Lc 70</span></td></tr><tr><th>Accent 12</th><td style="background:#FBFBFB;color:#2C2675"><strong>Aa</strong><span>12.37 <b class="b-aaa">AAA</b></span><span class="lc">Lc 96</span></td><td style="background:#F8F7F8;color:#2C2675"><strong>Aa</strong><span>11.97 <b class="b-aaa">AAA</b></span><span class="lc">Lc 94</span></td><td style="background:#EBF0FF;color:#2C2675"><strong>Aa</strong><span>11.24 <b class="b-aaa">AAA</b></span><span class="lc">Lc 90</span></td><td style="background:#E1E9FF;color:#2C2675"><strong>Aa</strong><span>10.54 <b class="b-aaa">AAA</b></span><span class="lc">Lc 85</span></td><td style="background:#D3DEFF;color:#2C2675"><strong>Aa</strong><span>9.54 <b class="b-aaa">AAA</b></span><span class="lc">Lc 79</span></td></tr><tr><th>Neutral 11</th><td style="background:#FBFBFB;color:#646368"><strong>Aa</strong><span>5.75 <b class="b-aa">AA</b></span><span class="lc">Lc 77</span></td><td style="background:#F8F7F8;color:#646368"><strong>Aa</strong><span>5.57 <b class="b-aa">AA</b></span><span class="lc">Lc 75</span></td><td style="background:#EBF0FF;color:#646368"><strong>Aa</strong><span>5.23 <b class="b-aa">AA</b></span><span class="lc">Lc 71</span></td><td style="background:#E1E9FF;color:#646368"><strong>Aa</strong><span>4.91 <b class="b-aa">AA</b></span><span class="lc">Lc 67</span></td><td style="background:#D3DEFF;color:#646368"><strong>Aa</strong><span>4.44 <b class="b-ui">3:1</b></span><span class="lc">Lc 61</span></td></tr><tr><th>Neutral 12</th><td style="background:#FBFBFB;color:#1F1E23"><strong>Aa</strong><span>16.00 <b class="b-aaa">AAA</b></span><span class="lc">Lc 101</span></td><td style="background:#F8F7F8;color:#1F1E23"><strong>Aa</strong><span>15.49 <b class="b-aaa">AAA</b></span><span class="lc">Lc 99</span></td><td style="background:#EBF0FF;color:#1F1E23"><strong>Aa</strong><span>14.54 <b class="b-aaa">AAA</b></span><span class="lc">Lc 95</span></td><td style="background:#E1E9FF;color:#1F1E23"><strong>Aa</strong><span>13.64 <b class="b-aaa">AAA</b></span><span class="lc">Lc 91</span></td><td style="background:#D3DEFF;color:#1F1E23"><strong>Aa</strong><span>12.35 <b class="b-aaa">AAA</b></span><span class="lc">Lc 84</span></td></tr></table></div></div>
+    <div class="mx-scroll"><div class="mx-wrap"><div class="ramp-name">HCT</div><table class="mx"><tr><th></th><th><span class="mx-sw" style="background:#FEFAFF"></span>Page</th><th><span class="mx-sw" style="background:#FBF7FD"></span>Subtle</th><th><span class="mx-sw" style="background:#F1EEFF"></span>Accent 3</th><th><span class="mx-sw" style="background:#EAE7FF"></span>Accent 4</th><th><span class="mx-sw" style="background:#DEDBFF"></span>Accent 5</th></tr><tr><th>Accent 11</th><td style="background:#FEFAFF;color:#342ACA"><strong>Aa</strong><span>8.73 <b class="b-aaa">AAA</b></span><span class="lc">Lc 87</span></td><td style="background:#FBF7FD;color:#342ACA"><strong>Aa</strong><span>8.51 <b class="b-aaa">AAA</b></span><span class="lc">Lc 85</span></td><td style="background:#F1EEFF;color:#342ACA"><strong>Aa</strong><span>7.90 <b class="b-aaa">AAA</b></span><span class="lc">Lc 80</span></td><td style="background:#EAE7FF;color:#342ACA"><strong>Aa</strong><span>7.46 <b class="b-aaa">AAA</b></span><span class="lc">Lc 77</span></td><td style="background:#DEDBFF;color:#342ACA"><strong>Aa</strong><span>6.73 <b class="b-aa">AA</b></span><span class="lc">Lc 70</span></td></tr><tr><th>Accent 12</th><td style="background:#FEFAFF;color:#282675"><strong>Aa</strong><span>12.52 <b class="b-aaa">AAA</b></span><span class="lc">Lc 96</span></td><td style="background:#FBF7FD;color:#282675"><strong>Aa</strong><span>12.20 <b class="b-aaa">AAA</b></span><span class="lc">Lc 95</span></td><td style="background:#F1EEFF;color:#282675"><strong>Aa</strong><span>11.34 <b class="b-aaa">AAA</b></span><span class="lc">Lc 90</span></td><td style="background:#EAE7FF;color:#282675"><strong>Aa</strong><span>10.70 <b class="b-aaa">AAA</b></span><span class="lc">Lc 86</span></td><td style="background:#DEDBFF;color:#282675"><strong>Aa</strong><span>9.65 <b class="b-aaa">AAA</b></span><span class="lc">Lc 80</span></td></tr><tr><th>Neutral 11</th><td style="background:#FEFAFF;color:#646268"><strong>Aa</strong><span>5.83 <b class="b-aa">AA</b></span><span class="lc">Lc 78</span></td><td style="background:#FBF7FD;color:#646268"><strong>Aa</strong><span>5.68 <b class="b-aa">AA</b></span><span class="lc">Lc 76</span></td><td style="background:#F1EEFF;color:#646268"><strong>Aa</strong><span>5.28 <b class="b-aa">AA</b></span><span class="lc">Lc 71</span></td><td style="background:#EAE7FF;color:#646268"><strong>Aa</strong><span>4.98 <b class="b-aa">AA</b></span><span class="lc">Lc 67</span></td><td style="background:#DEDBFF;color:#646268"><strong>Aa</strong><span>4.50 <b class="b-ui">3:1</b></span><span class="lc">Lc 61</span></td></tr><tr><th>Neutral 12</th><td style="background:#FEFAFF;color:#1F1E23"><strong>Aa</strong><span>16.03 <b class="b-aaa">AAA</b></span><span class="lc">Lc 101</span></td><td style="background:#FBF7FD;color:#1F1E23"><strong>Aa</strong><span>15.63 <b class="b-aaa">AAA</b></span><span class="lc">Lc 100</span></td><td style="background:#F1EEFF;color:#1F1E23"><strong>Aa</strong><span>14.52 <b class="b-aaa">AAA</b></span><span class="lc">Lc 95</span></td><td style="background:#EAE7FF;color:#1F1E23"><strong>Aa</strong><span>13.70 <b class="b-aaa">AAA</b></span><span class="lc">Lc 91</span></td><td style="background:#DEDBFF;color:#1F1E23"><strong>Aa</strong><span>12.37 <b class="b-aaa">AAA</b></span><span class="lc">Lc 84</span></td></tr></table></div></div>
+  </div>
+</section>
+
+<section id="tokens">
+  <h2>05 · Tokens</h2>
+  <div class="section-title">Copy the Scale</div>
+  <p class="section-blurb">CSS custom properties, light by default and dark under <code>prefers-color-scheme</code>. Pick one engine per project; don't mix steps between them.</p>
+  <div class="tok-head">HCT <button class="copy" data-t="tok-hct"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>Copy</button></div>
+  <pre class="tok" id="tok-hct">:root {
+  --indigo-1: #fefaff;
+  --indigo-2: #faf6ff;
+  --indigo-3: #f1eeff;
+  --indigo-4: #eae7ff;
+  --indigo-5: #dedbff;
+  --indigo-6: #ceccff;
+  --indigo-7: #bbbaff;
+  --indigo-8: #9f9fff;
+  --indigo-9: #3828f4;
+  --indigo-10: #3426e5;
+  --indigo-11: #342aca;
+  --indigo-12: #282675;
+  --rose-1: #fffaf9;
+  --rose-2: #fff5f5;
+  --rose-3: #ffecec;
+  --rose-4: #ffe3e4;
+  --rose-5: #ffd4d8;
+  --rose-6: #ffc2c7;
+  --rose-7: #ffa9b2;
+  --rose-8: #ff8293;
+  --rose-9: #ed1958;
+  --rose-10: #e31d55;
+  --rose-11: #d62a55;
+  --rose-12: #660c23;
+  --neutral-1: #fefaff;
+  --neutral-2: #fbf7fd;
+  --neutral-3: #f2eef4;
+  --neutral-4: #eae6ec;
+  --neutral-5: #e2dfe5;
+  --neutral-6: #dbd7dd;
+  --neutral-7: #cfccd2;
+  --neutral-8: #bcb9bf;
+  --neutral-9: #8e8b91;
+  --neutral-10: #838187;
+  --neutral-11: #646268;
+  --neutral-12: #1f1e23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --indigo-1: #151426;
+    --indigo-2: #16162b;
+    --indigo-3: #1a194c;
+    --indigo-4: #1d1a6a;
+    --indigo-5: #23207b;
+    --indigo-6: #2b288b;
+    --indigo-7: #35329f;
+    --indigo-8: #403cbd;
+    --indigo-9: #3828f4;
+    --indigo-10: #463fe7;
+    --indigo-11: #adadff;
+    --indigo-12: #e3e0ff;
+    --rose-1: #280e12;
+    --rose-2: #2f1115;
+    --rose-3: #4f121e;
+    --rose-4: #690e25;
+    --rose-5: #7d172f;
+    --rose-6: #92203a;
+    --rose-7: #ab2c47;
+    --rose-8: #cd3657;
+    --rose-9: #ed1958;
+    --rose-10: #ff5c7a;
+    --rose-11: #ff97a4;
+    --rose-12: #ffdadd;
+    --neutral-1: #16161a;
+    --neutral-2: #1d1d21;
+    --neutral-3: #26252a;
+    --neutral-4: #2d2d31;
+    --neutral-5: #343438;
+    --neutral-6: #3d3c41;
+    --neutral-7: #4b4a4f;
+    --neutral-8: #646368;
+    --neutral-9: #727076;
+    --neutral-10: #807e83;
+    --neutral-11: #bab7bd;
+    --neutral-12: #f6f2f8;
+  }
+}</pre>
+  <div class="tok-head">Leonardo <button class="copy" data-t="tok-leo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>Copy</button></div>
+  <pre class="tok" id="tok-leo">:root {
+  --indigo-1: #f9faff;
+  --indigo-2: #f5f8ff;
+  --indigo-3: #ebf0ff;
+  --indigo-4: #e1e9ff;
+  --indigo-5: #d3deff;
+  --indigo-6: #c1d0ff;
+  --indigo-7: #abbeff;
+  --indigo-8: #8ca4ff;
+  --indigo-9: #3828f4;
+  --indigo-10: #3726e5;
+  --indigo-11: #392aca;
+  --indigo-12: #2c2675;
+  --rose-1: #fff8f9;
+  --rose-2: #fff4f5;
+  --rose-3: #ffeaeb;
+  --rose-4: #ffe2e4;
+  --rose-5: #ffd4d7;
+  --rose-6: #ffc1c6;
+  --rose-7: #ffa9b1;
+  --rose-8: #fd8392;
+  --rose-9: #ed1958;
+  --rose-10: #e31d56;
+  --rose-11: #d72b54;
+  --rose-12: #651109;
+  --neutral-1: #fbfbfb;
+  --neutral-2: #f8f7f8;
+  --neutral-3: #eeeeef;
+  --neutral-4: #e7e7e8;
+  --neutral-5: #e0dfe1;
+  --neutral-6: #d9d8da;
+  --neutral-7: #cecdcf;
+  --neutral-8: #bbbabd;
+  --neutral-9: #8e8c91;
+  --neutral-10: #838187;
+  --neutral-11: #646368;
+  --neutral-12: #1f1e23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --indigo-1: #181426;
+    --indigo-2: #19142a;
+    --indigo-3: #22174a;
+    --indigo-4: #261668;
+    --indigo-5: #291d79;
+    --indigo-6: #2e268a;
+    --indigo-7: #37309d;
+    --indigo-8: #403abc;
+    --indigo-9: #3828f4;
+    --indigo-10: #403fe7;
+    --indigo-11: #9bb0ff;
+    --indigo-12: #d7e1ff;
+    --rose-1: #270e0a;
+    --rose-2: #2e100c;
+    --rose-3: #4e120c;
+    --rose-4: #66120a;
+    --rose-5: #7b1916;
+    --rose-6: #912228;
+    --rose-7: #aa2c3c;
+    --rose-8: #cb3554;
+    --rose-9: #ed1958;
+    --rose-10: #f86079;
+    --rose-11: #ff94a0;
+    --rose-12: #ffd8db;
+    --neutral-1: #17161a;
+    --neutral-2: #1c1b1f;
+    --neutral-3: #27252a;
+    --neutral-4: #2e2c31;
+    --neutral-5: #333237;
+    --neutral-6: #3d3b40;
+    --neutral-7: #4b494e;
+    --neutral-8: #636267;
+    --neutral-9: #716f75;
+    --neutral-10: #7e7c82;
+    --neutral-11: #b8b6ba;
+    --neutral-12: #f2f1f2;
+  }
+}</pre>
+</section>
+
+</div>
+
+<footer>
+  <div><strong style="color: var(--dark);">Reblis</strong> · Seed Palette · 2026 Edition</div>
+  <div class="stamp">2 seeds · 2 engines · 144 steps</div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+  const t = document.getElementById(b.dataset.t).textContent;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => {
+    const o = b.lastChild.textContent; b.lastChild.textContent = 'Copied'; setTimeout(() => b.lastChild.textContent = o, 1400);
+  }).catch(() => {});
+}));
+</script>
+</body>
+</html>

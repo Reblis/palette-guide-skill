@@ -10,6 +10,14 @@ Claude takes 1–12 colors (optionally grouped as primary / secondary, optionall
 
 Open [`template-example.html`](template-example.html) in a browser to see a finished guide — the Ricarte.ai palette: 6 colors, 30 shades, 15 gradients.
 
+## Seed mode
+
+```
+/palette-guide seed #3828F4:Indigo #ED1958:Rose
+```
+
+Give it 1–4 seed colors and it builds full 12-step light and dark scales with two engines, [Adobe Leonardo](https://leonardocolor.io) (contrast-solved in OKLCH) and [Material HCT](https://github.com/material-foundation/material-color-utilities) (tone-solved), both aimed at the contrast curve of [Radix Colors](https://www.radix-ui.com/colors). Every step shows its WCAG ratio against the page. The page also has a text-pairing matrix with APCA Lc and copyable CSS tokens. See [`seed-example.html`](seed-example.html). Seed mode needs Node 18+ and `npm ci` once in the skill folder.
+
 ## Install
 
 ```bash
